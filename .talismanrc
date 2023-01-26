@@ -1,2 +1,12 @@
 threshold: medium
 fileignoreconfig:
+- filename: aws/README.md
+  checksum: ca3f7d945cded244cbe48ac300282861537085d663c235b6af5efc052406478a
+- filename: admin.auto.tfvars.example
+  checksum: 3bde377b9569a8919dc1ad75b3ba22de6d25a30cf846f2087d984bad695be300
+- filename: gcp/README.md
+  checksum: 4b5cca6ff8a7a6e4495fb38f7d991ccaabe817550d417cd0c717cb4a6539ae74
+- filename: azure/README.md
+  checksum: f2ea521f8cd6ab1b2688287b94f9adafbcfc703e8d568dfcaab422ac9fc4ba1a
+- filename: README.md
+  checksum: 17bedff3d83dd52d10d0be1913ed9cfa27f597114e25a2ebaa8223fa54d39b54

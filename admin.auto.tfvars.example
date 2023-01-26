@@ -1,0 +1,28 @@
+# Common variables: these will be used when naming demo resources
+projectPrefix = "my-mcn-demo"
+resourceOwner = "lastname"
+
+# DNS domain name delegated to F5 XC.
+# Uncomment and change if you want external services and have a delegated domain.
+domain_name = "shared.acme.com"
+
+# F5 XC variables: these will be used to standup F5 XC resources across clouds
+namespace  = "my-namespace"
+f5xcTenant = "my-f5xcTenant-tenant-id"
+
+# Optional: if provided this public key will allow SSH access to the F5 XC nodes
+# and may be used by AWS/Azure/GCP where an SSH key can be specified
+ssh_key = "ssh-rsa REDACTED me@my.email"
+
+# AWS variables
+awsRegion        = "us-west-2"
+f5xcCloudCredAWS = "cloud-cred-aws"
+
+# Azure variables
+azureLocation      = "westus2"
+f5xcCloudCredAzure = "cloud-cred-azure"
+
+# GCP variables
+gcpRegion        = "us-west1"
+gcpProjectId     = "my-gcp-project-id"
+f5xcCloudCredGCP = "cloud-cred-gcp"
