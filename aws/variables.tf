@@ -35,12 +35,12 @@ variable "awsAz3" {
   default     = null
 }
 variable "volterraP12" {
-  description = "Location of volterra p12 file"
+  description = "Location of F5 XC p12 file"
   type        = string
   default     = null
 }
 variable "volterraUrl" {
-  description = "url of volterra api"
+  description = "URL of F5 XC api"
   type        = string
   default     = null
 }
@@ -53,12 +53,12 @@ variable "f5xcCloudCredAWS" {
   type        = string
 }
 variable "namespace" {
-  description = "Volterra application namespace"
+  description = "F5 XC application namespace"
   type        = string
 }
 variable "volterraVirtualSite" {
   type        = string
-  description = "The name of the Volterra virtual site that will receive LB registrations."
+  description = "The name of the F5 XC virtual site that will receive LB registrations."
 }
 
 variable "domain_name" {
