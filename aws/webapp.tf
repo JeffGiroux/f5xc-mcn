@@ -34,8 +34,9 @@ module "webapp" {
   key_name                    = aws_key_pair.sshKey.id
   private_ip                  = cidrhost(var.privateSubnets[0], 200)
   vpc_security_group_ids      = [aws_security_group.webserver.id]
-  subnet_id                   = module.vpc.private_subnets[0]
+  subnet_id                   = aws_subnet.private.id
   associate_public_ip_address = true
+  user_data                   = local.user_data
   tags = {
     Name  = format("%s-webapp-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner

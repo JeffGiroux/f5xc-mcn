@@ -88,13 +88,18 @@ variable "publicSubnets" {
 }
 variable "privateSubnets" {
   type        = list(any)
+  default     = ["10.1.52.0/24", "10.1.152.0/24"]
+  description = "Private subnet address prefixes"
+}
+variable "sliSubnets" {
+  type        = list(any)
   default     = ["10.1.20.0/24", "10.1.120.0/24"]
-  description = "Private subnet address prefixes (site local inside SLI)"
+  description = "Site Local Inside (SLI) subnet address prefixes for F5 XC"
 }
 variable "workloadSubnets" {
   type        = list(any)
   default     = ["10.1.30.0/24", "10.1.130.0/24"]
-  description = "DMZ1 subnet address prefixes for decryption zone"
+  description = "Workload subnet address prefixes for F5 XC"
 }
 variable "webapp_ami_search_name" {
   type        = string
