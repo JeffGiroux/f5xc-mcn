@@ -54,7 +54,7 @@ module "vpc" {
   enable_dns_hostnames = true
   #enable_nat_gateway   = true
   #single_nat_gateway   = true
-  tags = merge(local.volterraCommonLabels, {
+  tags = merge(local.f5xcCommonLabels, {
     Name  = format("%s-vpc-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   })
