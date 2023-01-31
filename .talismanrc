@@ -10,3 +10,5 @@ fileignoreconfig:
   checksum: f2ea521f8cd6ab1b2688287b94f9adafbcfc703e8d568dfcaab422ac9fc4ba1a
 - filename: README.md
   checksum: 17bedff3d83dd52d10d0be1913ed9cfa27f597114e25a2ebaa8223fa54d39b54
+- filename: files/backend/index.html
+  checksum: ef999557cb25b0553e65e20dade84749638cd9d932cf3c7cfc02f6077d25d57d
