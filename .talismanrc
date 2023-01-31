@@ -10,3 +10,11 @@ fileignoreconfig:
   checksum: f2ea521f8cd6ab1b2688287b94f9adafbcfc703e8d568dfcaab422ac9fc4ba1a
 - filename: README.md
   checksum: 17bedff3d83dd52d10d0be1913ed9cfa27f597114e25a2ebaa8223fa54d39b54
+- filename: files/backend/index.html
+  checksum: ef999557cb25b0553e65e20dade84749638cd9d932cf3c7cfc02f6077d25d57d
+- filename: aws/webapp.tf
+  checksum: d33ad84537f1ac19cbd20607d25b9390720241260aba8cadffc8d388e4be2159
+- filename: aws/main.tf
+  checksum: 286d9a98d90e6b5a4864376ec87d7082d22a4c7b6b3aad4b21db32ac86c50518
+- filename: aws/f5xcSite.tf
+  checksum: bcd99416a26ed15e450cb10f2ef7e914ab4fbe185e6eb583eb1850df89761759
