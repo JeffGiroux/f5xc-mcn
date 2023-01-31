@@ -50,33 +50,52 @@ module "vpc" {
   cidr                 = var.vpcCidr
   azs                  = [local.awsAz1, local.awsAz2]
   public_subnets       = var.publicSubnets
-  private_subnets      = var.privateSubnets
   enable_dns_hostnames = true
-  #enable_nat_gateway   = true
-  #single_nat_gateway   = true
   tags = merge(local.f5xcCommonLabels, {
     Name  = format("%s-vpc-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   })
 }
 
-############################ Workload Subnet ############################
+############################ Web Server Subnets ############################
+
+# @JeffGiroux workaround VPC module
+# - Need private subnet to reach internet to download onboarding files.
+# - Will associate public route table with private subnet for demo purposes.
+# - Note: Best practice is to use NAT gateway and bastion host.
+resource "aws_subnet" "private" {
+  vpc_id            = module.vpc.vpc_id
+  availability_zone = local.awsAz1
+  cidr_block        = var.privateSubnets[0]
+
+  tags = {
+    Name  = format("%s-private-%s", var.resourceOwner, var.buildSuffix)
+    Owner = var.resourceOwner
+  }
+}
+
+resource "aws_route_table_association" "private_routes" {
+  subnet_id      = aws_subnet.private.id
+  route_table_id = module.vpc.public_route_table_ids[0]
+}
+
+############################ F5 XC Subnets ############################
 
 # @JeffGiroux workaround route table association conflict
-# - AWS VPC module creates subnets with RT associations
-# - Volterra tries to create causes RT conflicts and fails site
-# - Create additional subnets for sli and workload without RT for Volterra's use
+# - AWS VPC module creates subnets with RT associations, and
+# - F5 XC tries to create which causes conflicts and fails.
+# - Create additional subnets for SLI and Workload without route tables.
 
-# resource "aws_subnet" "sli" {
-#   vpc_id            = module.vpc.vpc_id
-#   availability_zone = local.awsAz1
-#   cidr_block        = "10.1.20.0/24"
+resource "aws_subnet" "sli" {
+  vpc_id            = module.vpc.vpc_id
+  availability_zone = local.awsAz1
+  cidr_block        = var.sliSubnets[0]
 
-#   tags = {
-#     Name  = format("%s-site-local-inside-%s", var.resourceOwner, var.buildSuffix)
-#     Owner = var.resourceOwner
-#   }
-# }
+  tags = {
+    Name  = format("%s-site-local-inside-%s", var.resourceOwner, var.buildSuffix)
+    Owner = var.resourceOwner
+  }
+}
 
 resource "aws_subnet" "workload" {
   vpc_id            = module.vpc.vpc_id
@@ -114,6 +133,12 @@ resource "aws_security_group" "webserver" {
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
