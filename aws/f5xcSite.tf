@@ -30,7 +30,7 @@ resource "volterra_aws_vpc_site" "xc" {
       disk_size              = 100
 
       inside_subnet {
-        existing_subnet_id = module.vpc.private_subnets[0]
+        existing_subnet_id = aws_subnet.sli.id
       }
       outside_subnet {
         existing_subnet_id = module.vpc.public_subnets[0]
