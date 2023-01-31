@@ -16,3 +16,5 @@ fileignoreconfig:
   checksum: d33ad84537f1ac19cbd20607d25b9390720241260aba8cadffc8d388e4be2159
 - filename: aws/main.tf
   checksum: 286d9a98d90e6b5a4864376ec87d7082d22a4c7b6b3aad4b21db32ac86c50518
+- filename: aws/f5xcSite.tf
+  checksum: bcd99416a26ed15e450cb10f2ef7e914ab4fbe185e6eb583eb1850df89761759
