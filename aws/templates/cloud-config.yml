@@ -31,7 +31,6 @@ write_files:
           index index.html;
         }
       }
-
 runcmd:
   - apt-get update
   - apt-get install -y software-properties-common
@@ -39,4 +38,5 @@ runcmd:
   - curl -fsSL https://get.docker.com -o get-docker.sh
   - sh get-docker.sh
   - while ! docker --version; do echo trying again&sleep 1; done
-  - docker run --rm --name webapp -p 80:80 -v /var/lib/webapp/html:/usr/share/nginx/html:ro -v /var/lib/webapp/conf.d:/etc/nginx/conf.d:ro nginx:alpine
+  - docker run --rm --name webapp -p 80:80 -v /var/lib/webapp/html:/usr/share/nginx/html:ro -v /var/lib/webapp/conf.d:/etc/nginx/conf.d:ro nginx:alpine &
+  - docker run --rm --name container-demo-runner -p 8080:8080 -p 5001:5001 -p 11111:11111 jgruberf5/container-demo-runner:latest &
