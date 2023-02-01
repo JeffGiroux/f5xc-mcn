@@ -18,9 +18,9 @@ data "aws_ami" "ubuntu" {
 # Onboard files
 locals {
   user_data = templatefile("${path.module}/templates/cloud-config.yml", {
-    index_html      = replace(file("${path.module}/../files/backend/index.html"), "/[\\n\\r]/", "")
-    f5_logo_rgb_svg = base64gzip(file("${path.module}/../files/backend/f5-logo-rgb.svg"))
-    styles_css      = base64gzip(file("${path.module}/../files/backend/styles.css"))
+    f5demo_app      = "website"
+    f5demo_nodename = "Q2 Learning Week (AWS)"
+    f5demo_color    = "ed7b0c"
   })
 }
 
