@@ -20,8 +20,10 @@ You can opt to fill in the form fields or you can click on the "Next" button to 
 
 ![f5-simulator-next.png](../../images/f5-simulator-next.png)
 
-You will simulate creating an AWS Site. Then you will simulate creating an Azure Site. Stop when you reach the step of clicking on "Apply" after creating your AWS Site.
+You will simulate creating an AWS Site, then hit "apply".
 
 ![f5-simulator-apply-site.png](../../images/f5-simulator-apply-site.png)
+
+Then you will simulate creating an Azure Site. Stop when you reach the step of clicking on "Apply" after creating your Azure Site.
 
 Congratulations you just simulated deploying your AWS Site and Azure Site via the Distributed Cloud Console. In the next Lab Exercise we will be creating Load Balancer resources in the "Live" lab environment.
