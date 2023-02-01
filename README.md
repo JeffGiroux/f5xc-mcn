@@ -82,7 +82,8 @@ vi admin.auto.tfvars
 - Run the cloud specifc setup script: (remember that you are responsible for the cost of those components)
 ```bash
 ./aws-setup.sh
-./azure-setup.sh
+./azure-site1-setup.sh
+./azure-site2-setup.sh
 ./gcp-setup.sh
 ```
 
@@ -98,7 +99,8 @@ Reference each cloud for steps to validate.
 - Run the cloud specific destroy script
 ```bash
 ./aws-destroy.sh
-./azure-destroy.sh
+./azure-site1-destroy.sh
+./azure-site2-destroy.sh
 ./gcp-destroy.sh
 ```
 

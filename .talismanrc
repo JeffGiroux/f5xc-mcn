@@ -18,3 +18,7 @@ fileignoreconfig:
   checksum: 286d9a98d90e6b5a4864376ec87d7082d22a4c7b6b3aad4b21db32ac86c50518
 - filename: aws/f5xcSite.tf
   checksum: bcd99416a26ed15e450cb10f2ef7e914ab4fbe185e6eb583eb1850df89761759
+- filename: azure-site2/webapp.tf
+  checksum: 90caa4694e15c7dceb12e2bcfc252ebe5c28df30a70849d2c6015f6b762b5730
+- filename: azure-site2/README.md
+  checksum: df989737c7ffdb45e5661191533b5cb6a3b629edd20310dc1f8af89a6b056416
