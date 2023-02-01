@@ -84,8 +84,3 @@ variable "instanceType" {
   description = "instance type for virtual machine"
   default     = "Standard_B2ms"
 }
-variable "remoteCidr" {
-  type        = string
-  default     = "10.1.0.0/16"
-  description = "Remote CIDR of other cloud network"
-}

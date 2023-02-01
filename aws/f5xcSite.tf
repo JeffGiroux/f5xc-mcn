@@ -115,11 +115,3 @@ data "aws_network_interface" "xc_sli" {
     values = ["site-local-inside"]
   }
 }
-
-############################ Routes ############################
-
-resource "aws_route" "xcRoutes" {
-  route_table_id         = module.vpc.public_route_table_ids[0]
-  destination_cidr_block = var.remoteCidr
-  network_interface_id   = data.aws_network_interface.xc_sli.id
-}

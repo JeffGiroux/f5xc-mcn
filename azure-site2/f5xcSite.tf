@@ -59,7 +59,7 @@ resource "volterra_azure_vnet_site" "xc" {
     #     custom_static_route {
     #       subnets {
     #         ipv4 {
-    #           prefix = "10.1.0.0"
+    #           prefix = "192.168.0.0"
     #           plen   = "16"
     #         }
     #       }
@@ -67,7 +67,7 @@ resource "volterra_azure_vnet_site" "xc" {
     #         type = "NEXT_HOP_USE_CONFIGURED"
     #         nexthop_address {
     #           ipv4 {
-    #             addr = "10.1.52.1"
+    #             addr = "192.168.20.1"
     #           }
     #         }
     #       }
@@ -116,30 +116,4 @@ data "azurerm_network_interface" "sli" {
   name                = "master-0-sli"
   resource_group_name = local.f5xcResourceGroup
   depends_on          = [volterra_tf_params_action.apply]
-}
-
-############################ Routes ############################
-
-resource "azurerm_route_table" "webserver" {
-  name                          = format("%s-rt-webserver-%s", var.projectPrefix, var.buildSuffix)
-  location                      = azurerm_resource_group.rg.location
-  resource_group_name           = local.f5xcResourceGroup
-  disable_bgp_route_propagation = false
-
-  route {
-    name                   = "route1"
-    address_prefix         = var.remoteCidr
-    next_hop_type          = "VirtualAppliance"
-    next_hop_in_ip_address = data.azurerm_network_interface.sli.private_ip_address
-  }
-
-  tags = {
-    owner = var.resourceOwner
-  }
-  depends_on = [volterra_tf_params_action.apply]
-}
-
-resource "azurerm_subnet_route_table_association" "webserver" {
-  subnet_id      = module.network.vnet_subnets[2]
-  route_table_id = azurerm_route_table.webserver.id
 }
