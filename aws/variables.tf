@@ -106,3 +106,8 @@ variable "webapp_ami_search_name" {
   default     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
   description = "AWS AMI search filter to find correct web app (Ubuntu) for region"
 }
+variable "remoteCidr" {
+  type        = string
+  default     = "192.168.0.0/16"
+  description = "Remote CIDR of other cloud network"
+}
