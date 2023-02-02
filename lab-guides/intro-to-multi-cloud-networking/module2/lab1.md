@@ -5,7 +5,7 @@ Open the UDF Blueprint ["Q2 Learning Week - F5 XC MCN Intro"](https://udf.f5.com
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
 
-1. Login to your assigned Distributed Cloud tenant. https://f5-sales-demo.console.ves.volterra.io
+1. Login to your assigned Distributed Cloud tenant - https://f5-sales-demo.console.ves.volterra.io
 
 2. When you first login you will need to select your "persona". Enter your persona as "NetOps" and level as "Intermediate".
 

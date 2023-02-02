@@ -20,7 +20,7 @@ You can opt to fill in the form fields or you can click on the "Next" button to 
 
 ![f5-simulator-next.png](../images/f5-simulator-next.png)
 
-You will simulate creating an AWS Site, then hit "apply".
+You will simulate creating an AWS Site, then hit "Apply".
 
 ![f5-simulator-apply-site.png](../images/f5-simulator-apply-site.png)
 
