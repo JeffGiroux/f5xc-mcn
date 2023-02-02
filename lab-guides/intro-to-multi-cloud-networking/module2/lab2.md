@@ -190,3 +190,9 @@ In the previous section, you demonstrated how to securely connect from the Inter
 4. Expand a request to see more details like full HTTP request, user agent, site location, and more.
 
 <img src=../images/http_lb_stats4.png width="75%">
+
+Next
+----
+
+  - **[Lab 3: Create TCP Load Balancer](lab3.md)**
+  - **[Lab 4: Video Walk-Through (Optional)](lab4.md)**
