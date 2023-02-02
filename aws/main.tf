@@ -69,7 +69,7 @@ resource "aws_subnet" "private" {
   cidr_block        = var.privateSubnets[0]
 
   tags = {
-    Name  = format("%s-private-%s", var.resourceOwner, var.buildSuffix)
+    Name  = format("%s-private-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }
@@ -92,7 +92,7 @@ resource "aws_subnet" "sli" {
   cidr_block        = var.sliSubnets[0]
 
   tags = {
-    Name  = format("%s-site-local-inside-%s", var.resourceOwner, var.buildSuffix)
+    Name  = format("%s-site-local-inside-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }
@@ -103,7 +103,7 @@ resource "aws_subnet" "workload" {
   cidr_block        = var.workloadSubnets[0]
 
   tags = {
-    Name  = format("%s-workload-%s", var.resourceOwner, var.buildSuffix)
+    Name  = format("%s-workload-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }
@@ -150,7 +150,7 @@ resource "aws_security_group" "webserver" {
   }
 
   tags = {
-    Name  = format("%s-sg-webservers-%s", var.resourceOwner, var.buildSuffix)
+    Name  = format("%s-sg-webservers-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }
