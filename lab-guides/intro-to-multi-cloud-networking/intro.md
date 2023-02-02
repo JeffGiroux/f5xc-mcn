@@ -22,6 +22,8 @@ Once the AWS and Azure cloud environments are ready, you will deploy Distributed
 
 ![intro3.png](./images/intro3.png)
 
+> See [Scenario](../../README.md#scenario) for details on why this solution was chosen for a hypothetical customer looking for a minimally invasive solution to multi-cloud networking.
+
 Lab Environment
 ---------------
 
