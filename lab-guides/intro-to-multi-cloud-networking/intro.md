@@ -1,8 +1,6 @@
 Introduction to the Lab
 =======================
 
-This Lab environment highlights some of the basic concepts of F5 Distributed Cloud (XC) Mesh using AWS and Azure public cloud environments.
-
 During the lab, you will be emulating a customer that needs to expose an application running in AWS and Azure. The goal is to securely connect the application services between cloud environments. The frontend demo application runs on an AWS EC2 instance and is exposed to the internet. The backend demo application runs on an Azure VM instance, and it is internal only.
 
 Narrative
@@ -22,12 +20,10 @@ Once the AWS and Azure cloud environments are ready, you will deploy Distributed
 
 ![intro3.png](./images/intro3.png)
 
-> See [Scenario](../../README.md#scenario) for details on why this solution was chosen for a hypothetical customer looking for a minimally invasive solution to multi-cloud networking.
+Lab Environment - Next Steps
+----------------------------
 
-Lab Environment
----------------
-
-The AWS and Azure cloud environments are pre-built. The F5 Distributed Cloud sites are also pre-built. Each cloud environment contains NGINX resources running on Docker hosts.
+The AWS and Azure cloud environments have been pre-built already. They have Ubuntu VM instances running Docker with NGINX containers for the demo app (frontend/backend) and diagnostics app (client).
 
   - **[Module 1: Creating a Site (Simulator)](module1)**
   - **[Module 2: Create Load Balancer Resources](module2)**
