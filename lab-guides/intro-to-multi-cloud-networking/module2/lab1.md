@@ -24,7 +24,7 @@ Namespaces, which provide an environment for isolating configured applications o
 
 5. Click on the **Select Service** in the left-hand navigation. In the resulting fly out navigation, click **Load Balancers**.
 
-6. In the **Load Balancers** configuration screen observe the URL. In the URI path, locate the **<adjective-animal>** namespace that you have been assigned. It will be located in the portion of the URI path between */namespaces/* and */sites/* as shown in this example **…/namespaces/<namespace>/sites/…**. Note the namespace as it will be used throughout the remaining lab tasks.
+6. In the **Load Balancers** configuration screen observe the URL. In the URI path, locate the **\<adjective-animal\>** namespace that you have been assigned. It will be located in the portion of the URI path between */namespaces/* and */sites/* as shown in this example **…/namespaces/\<namespace\>/sites/…**. Note the namespace as it will be used throughout the remaining lab tasks.
 
 > *Administratively, there are other ways to find namespaces. Due to access and permission restrictions for this particular lab, those menus are not available.*
 
