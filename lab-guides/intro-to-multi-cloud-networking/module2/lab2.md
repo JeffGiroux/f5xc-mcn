@@ -85,7 +85,7 @@ Exercise 2: HTTP Load Balancer Configuration
 | Select type of Load Balancer | HTTP |
 | Automatically Manage DNS Records | Yes/Check |
 
-<img src=../images/lb-basic.png width="50%">
+<img src=../images/lb-basic.png width="75%">
 
 > My demo ephemeral namespace is "***protective-mouse***". Therefore my full domain is "***protective-mouse***.sales-demo.f5demos.com".
 
