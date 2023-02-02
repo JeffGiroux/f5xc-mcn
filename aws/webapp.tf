@@ -24,21 +24,31 @@ locals {
   })
 }
 
+############################ Public IP (EIP) ############################
+
+resource "aws_eip" "webserver" {
+  instance = aws_instance.webserver.id
+  vpc      = true
+
+  tags = {
+    Name  = format("%s-eip-webserver-%s", var.projectPrefix, var.buildSuffix)
+    Owner = var.resourceOwner
+  }
+}
+
 ############################ Compute ############################
 
-module "webapp" {
-  source                      = "terraform-aws-modules/ec2-instance/aws"
-  version                     = "4.3.0"
-  ami                         = data.aws_ami.ubuntu.id
-  instance_type               = "t3.large"
-  key_name                    = aws_key_pair.sshKey.id
-  private_ip                  = cidrhost(var.privateSubnets[0], 200)
-  vpc_security_group_ids      = [aws_security_group.webserver.id]
-  subnet_id                   = aws_subnet.private.id
-  associate_public_ip_address = true
-  user_data                   = local.user_data
+resource "aws_instance" "webserver" {
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t3.large"
+  subnet_id              = aws_subnet.private.id
+  private_ip             = cidrhost(var.privateSubnets[0], 200)
+  vpc_security_group_ids = [aws_security_group.webserver.id]
+  key_name               = aws_key_pair.sshKey.id
+  user_data              = local.user_data
+
   tags = {
-    Name  = format("%s-webapp-%s", var.projectPrefix, var.buildSuffix)
+    Name  = format("%s-webserver-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }
