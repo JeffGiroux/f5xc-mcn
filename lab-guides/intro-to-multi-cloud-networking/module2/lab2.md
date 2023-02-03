@@ -4,10 +4,10 @@ Lab 2: Create HTTP Load Balancer
 In this lab exercise you will create an HTTP Load Balancer that allows you to access the public AWS "frontend" application and explore the AWS environment. You also connect to a private AWS EC2 instance via a secure tunnel through an F5 Distributed Cloud Mesh node, which exposes a "diagnostics" app to simulate an internal AWS client. The "diagnostics" app will be used in the next lab to connect to the Azure "backend".
 
 You will complete the following tasks:
-- Create an origin pool for the AWS "frontend"
+- Create an Origin Pool for the AWS "frontend"
 - Create an HTTP Load Balancer and expose the "frontend" on F5 Distributed Cloud's Regional Edge
 - Test "frontend" URL with web browser
-- Modify the origin pool with the private IP of the AWS "diagnostics"
+- Modify the Origin Pool with the private IP of the AWS "diagnostics"
 - Test "diagnostics" URL with web browser
 - Review Monitoring and Analytics
 
@@ -35,7 +35,7 @@ The first task is to create an Origin Pool that refers to the "frontend" applica
 
 <img src=../images/menu-origin-pool.png width="50%">
 
-3. Enter the following variables:
+3. Enter the following variables in the *Metadata* section:
 
 | Variable | Value |
 | --- | --- |
@@ -63,7 +63,7 @@ The first task is to create an Origin Pool that refers to the "frontend" applica
 | Name | http |
 
 11. Under *HTTP HealthCheck*, click "View Configuration".
-12. Leave the default values and click "Apply" to exit the *Health Check HTTP Request Parameters* dialogue.
+12. Leave the default values and click "Apply" to return to the previous screen.
 13. Click "Continue" to return to the *Origin Pool* configuration.
 14. Click "Save and Exit" to create the Origin Pool.
 
@@ -74,7 +74,7 @@ Exercise 2: HTTP Load Balancer Configuration
 
 <img src=../images/menu-http-lb.png width="40%">
 
-2. Enter the following variables:
+2. Enter the following information:
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
@@ -87,11 +87,11 @@ Exercise 2: HTTP Load Balancer Configuration
 
 <img src=../images/lb-basic.png width="75%">
 
-> My demo ephemeral namespace is "***protective-mouse***". Therefore my full domain is "***protective-mouse***.sales-demo.f5demos.com".
+> My demo ephemeral namespace is "***protective-mouse***". Therefore my public domain is "***protective-mouse***.sales-demo.f5demos.com".
 
 3. Under the *Origin Pools* section, click "Add Item".
 4. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "fronted-public" you created earlier.
-5. Click "Apply" to exit the *Origin Pool with Weight and Priority* dialogue.
+5. Click "Apply" to return to the previous screen.
 6. Back in the *HTTP Load Balancer* creation menu, scroll down to the section *Other Settings*.
 7. The value "Internet" has been selected by default under "VIP Advertisement".
 
@@ -110,7 +110,7 @@ In this topology, you are sending traffic to an AnyCast IP that is hosted in the
 Exercise 3: Private Origin Pool
 ---------------------------------------------------
 
-In this exercise, you will create a new origin pool that contains the private AWS resource "diagnostics" app. You will demonstrate how to securely connect to the private AWS resource with an F5 Distributed Cloud Mesh node running in the AWS site.
+In this exercise, you will create a new Origin Pool that contains the private AWS resource "diagnostics" app. You will demonstrate how to securely connect to the private AWS resource with an F5 Distributed Cloud Mesh node running in the AWS site.
 
 > Pay attention to the IP addressing in the AWS site. Notice the 10.0.0.0/16 address space as this might be a problem later when you try to add Azure into the traffic flow.
 
@@ -124,6 +124,8 @@ In this exercise, you will create a new origin pool that contains the private AW
 
 3. Click on "Add Item" under Origin Servers.
 
+4. Enter the following information:
+
 | Variable | Value |
 | --- | --- |
 | Select Type of Origin Server | IP address of Origin Server on given Sites |
@@ -133,21 +135,21 @@ In this exercise, you will create a new origin pool that contains the private AW
 
 <img src=../images/pool-aws-private.png width="50%">
 
-4. Click "Apply" to return to the previous screen.
-5. Enter "8080" for the *Port*.
-6. Under the *Health Checks* section, click "Add Item".
-7. Click the *Health Check object* dropdown list and choose "Add Item".
-8. Enter the following variables in the *Metadata* section:
+5. Click "Apply" to return to the previous screen.
+6. Enter "8080" for the *Port*.
+7. Under the *Health Checks* section, click "Add Item".
+8. Click the *Health Check object* dropdown list and choose "Add Item".
+9. Enter the following variables in the *Metadata* section:
 
 | Variable | Value |
 | --- | --- |
 | Name | http-diag |
 
-9. Under *HTTP HealthCheck*, click "View Configuration".
-10. Enter "/diag" for *Path*.
-11. Click "Apply" to return to the previous screen.
-12. Click "Continue" to return to the *Origin Pool* configuration.
-13. Click "Save and Exit" to create the Origin Pool.
+10. Under *HTTP HealthCheck*, click "View Configuration".
+11. Enter "/diag" for *Path*.
+12. Click "Apply" to return to the previous screen.
+13. Click "Continue" to return to the *Origin Pool* configuration.
+14. Click "Save and Exit" to create the Origin Pool.
 
 Exercise 4: Edit HTTP Load Balancer Configuration
 ---------------------------------------------------
@@ -158,8 +160,8 @@ Exercise 4: Edit HTTP Load Balancer Configuration
 
 2. Click "Manage Configuration".
 3. In the upper right, click "Edit Configuration".
-4. Under *Origins*, click *the pencil icon* under the "Actions" column to modify your origin pool.
-5. Replace the origin pool "frontend-public" with the new origin pool "frontend-private".
+4. Under *Origins*, click *the pencil icon* under the "Actions" column to modify your Origin Pool.
+5. Replace the Origin Pool "frontend-public" with the new Origin Pool "frontend-private".
 6. Click "Apply" to return to the previous screen.
 7. Click "Save and Exit" to save the HTTP LB changes.
 8. Refresh the browser window for your URL ("http://***\<adjective-animal\>***.sales-demo.f5demos.com").
