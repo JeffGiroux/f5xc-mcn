@@ -1,7 +1,7 @@
 Introduction to the Lab
 =======================
 
-During the lab, you will be emulating a customer that needs to expose an application running in AWS and Azure. The goal is to securely connect the application services between cloud environments. The frontend demo application runs on an AWS EC2 instance and is exposed to the internet. The backend demo application runs on an Azure VM instance, and it is internal only.
+During the lab, you will be emulating a customer that needs to expose an application running in AWS and Azure. The goal is to securely connect the application services between cloud environments. The "frontend" demo application runs on an AWS EC2 instance and is exposed to the internet. The "backend" demo application runs on an Azure VM instance, and it is internal only.
 
 Narrative
 ---------
@@ -12,7 +12,7 @@ In this example we are starting with an application running in AWS.
 
 The "frontend" application has a requirement that it must be able to communicate with the "backend". The "backend" could be a database legacy system, etc.
 
-The goal is to extend the environment into Azure and still allow the AWS "frontend" to connect to the Azure "backend". The following topology illustrates Distributed Cloud Mesh nodes deployed in both AWS and Azure environments as well as backend NGINX web servers running a simple demo application.
+The goal is to extend the environment into Azure and still allow the AWS "frontend" to connect to the Azure "backend". The following topology illustrates Distributed Cloud Mesh nodes deployed in both AWS and Azure environments as well as NGINX web servers running a simple demo application.
 
 ![intro2.png](./images/intro2.png)
 
