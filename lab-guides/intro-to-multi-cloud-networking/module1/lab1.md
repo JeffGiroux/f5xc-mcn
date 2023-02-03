@@ -6,6 +6,9 @@ F5 Simulators
 
 F5 provides "simulations" of its services via "F5 Simulators". You will first use the Distributed Cloud Simulator to familiarize yourself with the environment. Later in the lab, you will use a shared lab environment to let you interact with a "live" system.
 
+> For demo purposes, the F5 Distributed Cloud nodes in AWS and Azure have been pre-built. This is to simplify the lab and avoid the requirement for user to need public cloud credentials. In addition, it helps with overall lab clean up of F5 Distributed Cloud resources.
+
+
 Exercise #1
 -----------
 
