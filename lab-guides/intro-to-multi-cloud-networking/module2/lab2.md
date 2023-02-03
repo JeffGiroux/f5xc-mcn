@@ -1,7 +1,7 @@
 Lab 2: Create HTTP Load Balancer
 ================================
 
-In this lab exercise you will create an HTTP Load Balancer that allows you to access the public AWS "frontend" application and explore the AWS environment. You also connect to a private AWS EC2 instance via a secure tunnel through an F5 Distributed Cloud Mesh node, which exposes a "diagnostics" app to simulate an internal AWS client. The "diagnostics" app will be used in the next lab to connect to the Azure "backend".
+In this exercise, you will create an HTTP Load Balancer that allows you to access the public AWS "frontend" application and explore the AWS environment. You also connect to a private AWS EC2 instance via a secure tunnel through an F5 Distributed Cloud Mesh node, which exposes a "diagnostics" app to simulate an internal AWS client. The "diagnostics" app will be used in the next lab to connect to the Azure "backend".
 
 You will complete the following tasks:
 - Create an Origin Pool for the AWS "frontend"
@@ -27,7 +27,7 @@ Exercise 1:  Public Origin Pool
 ---------------------------------------------------
 The first task is to create an Origin Pool that refers to the "frontend" application service running in the AWS site.
 
-1. Using the Distributed Cloud Console, switch to the "Load Balancers" context. It can be access either from the Home page or an internal page.
+1. Using the Distributed Cloud Console, switch to the "Load Balancers" context. It can be accessed either from the Home page or the internal page.
 
 <img src=../images/choosing-service-lb.png width="50%">
 
@@ -50,7 +50,7 @@ The first task is to create an Origin Pool that refers to the "frontend" applica
 | Select Type of Origin Server | Public DNS Name of Origin Server (default) |
 | DNS Name | ec2-52-24-25-72.us-west-2.compute.amazonaws.com |
 
-<img src=../images/pool-aws-public.png width="60%">
+<img src=../images/pool-aws-public.png width="75%">
 
 6. Click "Apply" to return to the previous screen.
 7. Enter "80" for the *Port*.
@@ -90,7 +90,7 @@ Exercise 2: HTTP Load Balancer Configuration
 > My demo ephemeral namespace is "***protective-mouse***". Therefore my public domain is "***protective-mouse***.sales-demo.f5demos.com".
 
 3. Under the *Origin Pools* section, click "Add Item".
-4. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "fronted-public" you created earlier.
+4. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "frontend-public" you created earlier.
 5. Click "Apply" to return to the previous screen.
 6. Back in the *HTTP Load Balancer* creation menu, scroll down to the section *Other Settings*.
 7. The value "Internet" has been selected by default under "VIP Advertisement".
@@ -173,9 +173,9 @@ You now have access to the "diagnostics" app running inside the AWS environment.
 Exercise 5: Review General Monitoring Stats
 ---------------------------------------------------
 
-In the previous section, you demonstrated how to securely connect from the Internet to private resources inside your AWS site. The best part...no special public cloud provider knowledge was required! Next, you will review the built-in analytics of F5 Distributed Cloud platform.
+In the previous section, you demonstrated how to securely connect from the Internet to private resources inside your AWS site. No special public cloud provider knowledge was required! Next, you will review the built-in analytics of F5 Distributed Cloud platform.
 
-> Note: Explore!
+> Note: Go explore!!!
 
 1. On the left menu, go to "Virtual Hosts"->"HTTP Load Balancers" and click "Performance Monitoring" under the "frontend" HTTP LB.
 

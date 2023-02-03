@@ -4,7 +4,7 @@ Lab 1: Creating a Site (Simulator)
 F5 Simulators
 -------------
 
-F5 provides "simulations" of its services via "F5 Simulators". We will first use the Distributed Cloud Simulator to familiarize you with the environment. Later in the lab we will make use of a shared lab environment that will let you interact with a "live" system.
+F5 provides "simulations" of its services via "F5 Simulators". You will first use the Distributed Cloud Simulator to familiarize yourself with the environment. Later in the lab, you will use a shared lab environment to let you interact with a "live" system.
 
 Exercise #1
 -----------
@@ -20,7 +20,7 @@ You can opt to fill in the form fields or you can click on the "Next" button to 
 
 ![f5-simulator-next.png](../images/f5-simulator-next.png)
 
-You will simulate creating an AWS Site, then hit "Apply".
+You will first simulate creating an AWS Site, then hit "Apply".
 
 ![f5-simulator-apply-site.png](../images/f5-simulator-apply-site.png)
 

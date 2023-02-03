@@ -5,8 +5,6 @@ One of the requirements from the "Narrative" is to enable the AWS "frontend" app
 
 In addition, there is a small networking problem. The AWS application is running in a network with 10.1.52.0/24 address space. The Azure application is ***also*** running in a network with 10.1.52.0/24 address space. Unfortunately the AWS and Azure cloud teams did not plan the design properly resulting in networks with IP overlap. You can easily solve this with F5 Distributed Cloud nodes.
 
-> For this demo, the internal DNS zone ***sales-demo.f5demos.internal*** has been pre-built in each public cloud environment. The zone is configured to forward all requests to the F5 Distributed Cloud node.
-
 You will complete the following tasks:
 - Validate DNS from the AWS "diagnostics" app
 - Create an Origin Pool for the Azure "backend"
@@ -15,6 +13,8 @@ You will complete the following tasks:
 - Connect to the Azure "backend" from the AWS "diagnostics" app
 
 ![tcplb-lab.png](../images/tcplb-lab.png)
+
+> For this demo, the internal DNS zone ***sales-demo.f5demos.internal*** has been pre-built in each public cloud environment. The zone is configured to forward all requests to the F5 Distributed Cloud node.
 
 *Logical Traffic Flow*
 1. "frontend" performs a DNS lookup for "backend"
@@ -52,7 +52,7 @@ In the previous lab exercise, you made a "In Container Diagnostic Services" serv
    ;; Query time: 4 msec
 ```
 
-The last step was a basic DNS test to simply illustrate that the "diagnostics" app running in AWS can do a DNS query and receive an answer. The *target* value was the AWS EC2 instance private DNS name, and the answer is the private IP address of the AWS instance (ex. "10.1.52.200"). Next we will verify that we do not yet have a DNS record for adjective-animal.example.internal
+The last step was a basic DNS test to simply illustrate that the "diagnostics" app running in AWS can do a DNS query and receive an answer. The *target* value was the AWS EC2 instance private DNS name, and the answer is the private IP address of the AWS instance. Next, you will verify that there is not yet a DNS record for ***\<adjective-animal\>***.sales-demo.f5demos.internal.
 
 5. Refresh your browser window.
 6. Click "DNS Lookup".
@@ -169,7 +169,7 @@ In this exercise, you will create an F5 Distributed Cloud TCP Load Balancer for 
 10. Click "Apply" to return to the previous screen.
 11. Click "Apply" again to return to *TCP Load Balancer* configuration page.
 
-<img src=../images/tcp_lb_config.png width="50%">
+<img src=../images/tcp_lb_config.png width="75%">
 
 12. Click "Save and Exit" to create the TCP Load Balancer.
 
