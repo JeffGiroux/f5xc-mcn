@@ -13,7 +13,7 @@ resource "aws_route53_resolver_endpoint" "dns" {
   }
 
   tags = {
-    Name  = format("%s-resolver-%s", var.resourceOwner, var.buildSuffix)
+    Name  = format("%s-resolver-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }
@@ -31,7 +31,7 @@ resource "aws_route53_resolver_rule" "dns" {
   }
 
   tags = {
-    Name  = format("%s-route53rule-%s", var.resourceOwner, var.buildSuffix)
+    Name  = format("%s-route53rule-%s", var.projectPrefix, var.buildSuffix)
     Owner = var.resourceOwner
   }
 }

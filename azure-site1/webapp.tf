@@ -3,9 +3,9 @@
 # Onboard files
 locals {
   user_data = templatefile("${path.module}/templates/cloud-config.yml", {
-    index_html      = replace(file("${path.module}/../files/backend/index.html"), "/[\\n\\r]/", "")
-    f5_logo_rgb_svg = base64gzip(file("${path.module}/../files/backend/f5-logo-rgb.svg"))
-    styles_css      = base64gzip(file("${path.module}/../files/backend/styles.css"))
+    f5demo_app      = "text"
+    f5demo_nodename = "Q2 Learning Week (Azure)"
+    f5demo_color    = "0194d2"
   })
   zone = random_shuffle.zones.result[0]
 }

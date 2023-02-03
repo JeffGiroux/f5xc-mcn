@@ -26,7 +26,7 @@ locals {
 
 # Create a virtual site that will identify services deployed in AWS, Azure, and GCP.
 resource "volterra_virtual_site" "site" {
-  name        = format("%s-site-%s", var.projectPrefix, local.buildSuffix)
+  name        = format("%s-vsite-%s", var.projectPrefix, local.buildSuffix)
   namespace   = var.namespace
   description = format("Virtual site for %s-%s", var.projectPrefix, local.buildSuffix)
   labels      = local.commonLabels
