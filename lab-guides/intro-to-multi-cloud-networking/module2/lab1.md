@@ -1,7 +1,7 @@
 Lab 1: Access the Shared Lab Environment
 ========================================
 
-Open the UDF Blueprint ["Q2 Learning Week - F5 XC MCN Intro"](https://udf.f5.com/b/1129c8fa-38c9-425d-bbaa-a6e3e15ee13d#documentation) and click "Deploy" to create a deployment. Then hit "Start".
+Open the UDF Blueprint ["Learning Week Walkthrough - F5XC"](https://udf.f5.com/b/c0ed9a8c-034a-4398-8729-2fb5afe66ace#documentation) and click "Deploy" to create a deployment. Then hit "Start".
 
 > *Once you start the UDF deployment, it will create an ephemeral account on the F5 Distributed Cloud console (this may take 5-10 min). Then you will receive an email to update your password.*
 
