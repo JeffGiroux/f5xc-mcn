@@ -250,7 +250,9 @@ In this exercise, you will emulate how a distributed application can access a re
    command completed with return code:0
 ```
 
-You will see an output and node name of "Q2 Learning Week (Azure)". This is the "backend" application. Also pay attention to the "host_header" value at the bottom with full name. Next, try repeating the same command with the private IP address of the F5 Distributed Cloud node. This is the IP address you retrieved in Exercise 4.
+You will see an output and node name of "Q2 Learning Week (Azure)". This is the "backend" application. The "Server IP" of 10.1.52.200 is the Azure "backend". The "Client IP" of 10.1.20.4 is the internal IP address of the F5 Distributed Cloud node in Azure. Traffic leaves the AWS site, traverses the F5 Distributed Cloud Global Network, then reaches the Azure site where the F5 node is performing SNAT to reach the target. Also pay attention to the "host_header" value at the bottom with full name.
+
+Next, try repeating the same command with the private IP address of the F5 Distributed Cloud node in AWS. This is the IP address you retrieved in Exercise 4.
 
 5. Click on "Run Command".
 6. Enter "curl -s http://10.1.20.39".
