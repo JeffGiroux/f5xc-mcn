@@ -23,6 +23,7 @@ The initial deployment will consist of the following:
   - 1x NGINX app (VM instance)
 - TBD Google
   - 1x xxxx
+  - 1x xxxx
 
 ## Configuration Example
 
