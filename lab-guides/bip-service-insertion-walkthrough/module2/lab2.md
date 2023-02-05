@@ -13,6 +13,4 @@ Lab 2: View the Virtual Server Configuration
 
 3. Feel free to explore additional BIG-IP configuration. The provided account is read only.
 
-The virtual server was created with this simple AS3 declaration.
-
-<script src="https://gist.github.com/kreynoldsf5/541509d0c991bf5661a7d94c7320a0d4.js"></script>
+The virtual server was created with [this simple AS3 declaration](https://gist.github.com/kreynoldsf5/541509d0c991bf5661a7d94c7320a0d4).

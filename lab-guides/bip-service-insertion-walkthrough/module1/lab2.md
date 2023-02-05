@@ -32,6 +32,8 @@ Recall the end to end packet flow for this configuration.
 
 ![packet-flow.png](../images/packet-flow.png)
 
+The NFV endpoint can be accessed [here](http://learning-week.f5demos.com/).
+
 Next
 ----
 
