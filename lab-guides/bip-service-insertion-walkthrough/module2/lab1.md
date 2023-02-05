@@ -9,7 +9,7 @@ You'll recall the FQDN was available on the [External Service Overview Dashboard
 
 ([Hint](https://big-ip1.sales-demo.f5demos.com/tmui/login.jsp))
 
-2. Login to the BIG-IP device with the credentials given in the UDF deployment description.
+2. Login to the BIG-IP device with the credentials given in the [UDF deployment description](https://udf.f5.com/b/c0ed9a8c-034a-4398-8729-2fb5afe66ace#documentation).
 
 ![login.png](../images/login.png)
 
