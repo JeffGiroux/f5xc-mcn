@@ -15,12 +15,12 @@ Lab 2: View the External Site Configuration
 ![manage-config.png](../images/manage-config.png)
 
 From here take note of the External site configuration.
-For this site we've exposed the BIG-IP manaagement in interface to the internet.
+For this site we've exposed the BIG-IP manaagement interface to the internet.
 The FQDN for this device is {{hostname}}.{{domain suffix}}.
 
-We could have also exposed the BIG-IP management interface on the "site local network" of a customer edge.
+We could have also exposed the BIG-IP management interface on the "site local network" of a customer edge. This would restrict access to a customer's private XC network.
 
-Note the "Endpoint Service NFV" is set to "Advertise On Cloud External IP". An AWS EIP has been created to expose the VIP.
+For BIG-IP data plane traffic the "Endpoint Service NFV" is set to "Advertise On Cloud External IP". An AWS EIP has been created to expose the VIP.
 
 ![NFV.png](../images/NFV.png)
 

@@ -15,6 +15,8 @@ Lab 3: View the External Site Stats
 
 Note the BIG-IP statistics included on this dashboard including service, traffic, and instance information.
 
+![stats.png](../images/stats.png)
+
 Next
 ----
 
