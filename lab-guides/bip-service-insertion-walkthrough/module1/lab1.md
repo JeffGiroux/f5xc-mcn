@@ -28,6 +28,8 @@ Explore the "Services VPC", "Transit Gateway", and "Site Node Parameters" config
 This is an AWS Transit Gateway site -- with a single master node in this simple example.
 The VPC containing the BIG-IP has been automatically attached to the TGW.
 
+![tgw-meta.png](../images/tgw-meta.png)
+
 Next
 ----
 

@@ -1,7 +1,10 @@
 Introduction to the Lab
 =======================
 
-During the lab you will be viewing the deployed configuration of an F5 XC Console managed and orchestrated BIG-IP "External Site".
+During the lab you will be viewing the deployed configuration of a BIG-IP based "External Service".
+The service configuration is managed and orchestrated through the F5 XC Console.
+The BIG-IP virtual server configuration is managed through TMUI (or AS3).
+
 
 Lab Environment
 ---------------
@@ -17,7 +20,7 @@ Narrative
 The F5 Distributed Cloud Console provides automation to simplify the integration of a BIG-IP into an XC AWS Transit Gateway topology.
 Integration is accomplished through the use of TGW peering and IP in IP tunnels between the XC CE, the BIG-IP, and pool members.
 
-Both North/South and East/West traffic flows are easy to configure using the XC Console BIG-IP External Site type.
+Both North/South and East/West traffic flows are easy to configure using the XC Console BIG-IP External Service type.
 
 ![intro1.png](./images/topology.png)
 
