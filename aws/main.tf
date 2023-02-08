@@ -20,17 +20,21 @@ provider "volterra" {
   timeout = "90s"
 }
 
-############################ Locals ############################
+############################ Zones ############################
 
 # Retrieve availability zones
 data "aws_availability_zones" "available" {
   state = "available"
 }
 
+############################ Client IP ############################
+
 # Retrieve client public IP
 data "http" "ipinfo" {
   url = "https://ifconfig.me/ip"
 }
+
+############################ Locals ############################
 
 locals {
   awsAz1 = var.awsAz1 != null ? var.awsAz1 : data.aws_availability_zones.available.names[0]
