@@ -22,8 +22,14 @@ provider "volterra" {
 
 ############################ Locals ############################
 
+# Retrieve availability zones
 data "aws_availability_zones" "available" {
   state = "available"
+}
+
+# Retrieve client public IP
+data "http" "ipinfo" {
+  url = "https://ifconfig.me/ip"
 }
 
 locals {
@@ -39,6 +45,8 @@ locals {
     suffix   = var.buildSuffix
     platform = "aws"
   })
+
+  clientIp = format("%s/32", data.http.ipinfo.response_body)
 }
 
 ############################ VPCs ############################
@@ -128,7 +136,7 @@ resource "aws_security_group" "webserver" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [local.clientIp]
   }
   ingress {
     from_port   = 80
@@ -140,7 +148,7 @@ resource "aws_security_group" "webserver" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.vpcCidr]
   }
   egress {
     from_port   = 0
