@@ -29,6 +29,19 @@ resource "random_shuffle" "zones" {
   }
 }
 
+############################ Client IP ############################
+
+# Retrieve client public IP
+data "http" "ipinfo" {
+  url = "https://ifconfig.me/ip"
+}
+
+############################ Locals ############################
+
+locals {
+  clientIp = format("%s/32", data.http.ipinfo.response_body)
+}
+
 ############################ Resource Groups ############################
 
 # Create Resource Groups
@@ -80,7 +93,7 @@ resource "azurerm_network_security_group" "webserver" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "*"
+    source_address_prefix      = local.clientIp
     destination_address_prefix = "*"
   }
   security_rule {
@@ -104,7 +117,7 @@ resource "azurerm_network_security_group" "webserver" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "8080"
-    source_address_prefix      = "*"
+    source_address_prefix      = var.vnetCidr
     destination_address_prefix = "*"
   }
 

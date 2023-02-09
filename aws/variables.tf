@@ -103,6 +103,6 @@ variable "workloadSubnets" {
 }
 variable "webapp_ami_search_name" {
   type        = string
-  default     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+  default     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20230112"
   description = "AWS AMI search filter to find correct web app (Ubuntu) for region"
 }
