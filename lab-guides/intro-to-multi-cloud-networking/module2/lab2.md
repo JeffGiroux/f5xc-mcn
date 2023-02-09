@@ -7,7 +7,8 @@ You will complete the following tasks:
 - Create an Origin Pool for the AWS "frontend"
 - Create an HTTP Load Balancer and expose the "frontend" on F5 Distributed Cloud's Regional Edge
 - Test "frontend" URL with web browser
-- Modify the Origin Pool with the private IP of the AWS "diagnostics"
+- Create an Origin Pool for the AWS "diagnostics"
+- Create an HTTP Load Balancer and expose the "diagnostics" on F5 Distributed Cloud's Regional Edge
 - Test "diagnostics" URL with web browser
 - Review Monitoring and Analytics
 
@@ -15,17 +16,20 @@ You will complete the following tasks:
 
 *Logical Traffic Flow*
 1. Client connects to HTTP LB deployed in Regional Edge
-2. Connection forwarded to AWS "frontend"
-3. AWS "frontend" connects to Azure "backend" via TCP LB deployed in AWS site
+2. Connection forwarded to F5 node in AWS site via IPSEC tunnels
+3. F5 node forwards traffic to "frontend"
+4. AWS "frontend" connects to Azure "backend" via TCP LB deployed in AWS site
+5. Connect forwarded from AWS F5 node to Azure F5 node via F5 Distributed Cloud Global Network
+6. Azure F5 node forwards traffic to "backend"
 
 Regional Edge
 ---------------------------------------------------
 
 A Regional Edge (RE) is part of the F5 Distributed Cloud Global Network and provides connectivity to services. Previously when you deployed the AWS and Azure sites (via F5 Simulator), those are considered "Customer Edge (CE)" sites running on [F5 Nodes](https://docs.cloud.f5.com/docs/ves-concepts/site). The CE communicates with the RE via IPSEC/SSL tunnels (redundant), and each CE is associated with 2x RE for redundancy.
 
-Exercise 1:  Public Origin Pool
+Exercise 1:  Frontend Origin Pool
 ---------------------------------------------------
-The first task is to create an Origin Pool that refers to the "frontend" application service running in the AWS site.
+The first task is to create an Origin Pool that refers to the "frontend" application service running in the AWS site. You will demonstrate how to securely connect to the private AWS resource with an F5 Distributed Cloud Mesh node running in the AWS site.
 
 1. Using the Distributed Cloud Console, switch to the "Load Balancers" context. It can be accessed either from the Home page or the internal page.
 
@@ -39,7 +43,7 @@ The first task is to create an Origin Pool that refers to the "frontend" applica
 
 | Variable | Value |
 | --- | --- |
-| Name | frontend-public |
+| Name | frontend |
 
 4. Click on "Add Item" under Origin Servers.
 
@@ -47,10 +51,12 @@ The first task is to create an Origin Pool that refers to the "frontend" applica
 
 | Variable | Value |
 | --- | --- |
-| Select Type of Origin Server | Public DNS Name of Origin Server (default) |
-| DNS Name | ec2-52-24-25-72.us-west-2.compute.amazonaws.com |
+| Select Type of Origin Server | IP address of Origin Server on given Sites |
+| IP | 10.1.52.200 |
+| Site | system/q2lw-aws-c8e4 |
+| Select Network on the site | Inside Network |
 
-<img src=../images/pool-aws-public.png width="75%">
+<img src=../images/pool-aws-private.png width="50%">
 
 6. Click "Apply" to return to the previous screen.
 7. Enter "80" for the *Port*.
@@ -67,8 +73,8 @@ The first task is to create an Origin Pool that refers to the "frontend" applica
 13. Click "Continue" to return to the *Origin Pool* configuration.
 14. Click "Save and Exit" to create the Origin Pool.
 
-Exercise 2: HTTP Load Balancer Configuration
----------------------------------------------------
+Exercise 2: Frontend HTTP Load Balancer
+---------------------------------------
 
 1. On the left menu, go to "Manage"->"Load Balancers"->"HTTP Load Balancers". Click "Add HTTP Load Balancer".
 
@@ -81,16 +87,16 @@ Exercise 2: HTTP Load Balancer Configuration
 | Variable | Value |
 | --- | --- |
 | Name | frontend |
-| Domains | ***\<adjective-animal\>***.sales-demo.f5demos.com |
+| Domains | frontend.***\<adjective-animal\>***.sales-demo.f5demos.com |
 | Select type of Load Balancer | HTTP |
 | Automatically Manage DNS Records | Yes/Check |
 
-<img src=../images/lb-basic.png width="75%">
+<img src=../images/lb-frontend.png width="75%">
 
-> My demo ephemeral namespace is "***protective-mouse***". Therefore my public domain is "***protective-mouse***.sales-demo.f5demos.com".
+> My demo ephemeral namespace is "***protective-mouse***". Therefore my domain is "frontend.***protective-mouse***.sales-demo.f5demos.com".
 
 3. Under the *Origin Pools* section, click "Add Item".
-4. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "frontend-public" you created earlier.
+4. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "frontend" you created earlier.
 5. Click "Apply" to return to the previous screen.
 6. Back in the *HTTP Load Balancer* creation menu, scroll down to the section *Other Settings*.
 7. The value "Internet" has been selected by default under "VIP Advertisement".
@@ -99,20 +105,18 @@ Exercise 2: HTTP Load Balancer Configuration
 
 8. Click "Save and Exit" to create the HTTP Load Balancer.
 
-Once the HTTP Load Balancer has been deployed, you can use a web browser to access the AWS "frontend". The FQDN used in our example is http://protective-mouse.sales-demo.f5demos.com. Your FQDN should follow the format of ***[unique-name]***.sales-demo.f5demos.com.
+Once the HTTP Load Balancer has been deployed, you can use a web browser to access the AWS "frontend". The FQDN used in our example is http://frontend.protective-mouse.sales-demo.f5demos.com. Your FQDN should follow the format of *frontend.****[unique-namespace]****.sales-demo.f5demos.com*.
 
 The public demo app should look like the following:
 
-<img src=../images/frontend-public-vip.png width="100%">
+<img src=../images/public-vip-frontend.png width="100%">
 
-In this topology, you are sending traffic to an AnyCast IP that is hosted in the F5 Distributed Cloud RE. The RE communication to the AWS "frontend" origin pool is via the AWS instance's Public IP address over the Internet.
+In this topology, you are sending traffic to an AnyCast IP that is hosted in the F5 Distributed Cloud RE. The RE communication to the AWS site is via IPSEC tunnels to the F5 node. Finally, traffic is forwarded from the F5 node to the "frontend" AWS instance's private IP address.
 
-Exercise 3: Private Origin Pool
----------------------------------------------------
+Exercise 3: Diagnostics Origin Pool
+-----------------------------------
 
-In this exercise, you will create a new Origin Pool that contains the private AWS resource "diagnostics" app. You will demonstrate how to securely connect to the private AWS resource with an F5 Distributed Cloud Mesh node running in the AWS site.
-
-> Pay attention to the IP addressing in the AWS site. Notice the 10.0.0.0/16 address space as this might be a problem later when you try to add Azure into the traffic flow.
+In this exercise, you will create a new Origin Pool that contains the "diagnostics" application running in AWS. This tool will allow testing from within AWS like an "internal client" in the VPC.
 
 1. On the left menu, go to "Manage"->"Load Balancers"->"Origin Pools". Click "Add Origin Pool".
 
@@ -120,7 +124,7 @@ In this exercise, you will create a new Origin Pool that contains the private AW
 
 | Variable | Value |
 | --- | --- |
-| Name | frontend-private |
+| Name | diagnostics |
 
 3. Click on "Add Item" under Origin Servers.
 
@@ -151,24 +155,39 @@ In this exercise, you will create a new Origin Pool that contains the private AW
 13. Click "Continue" to return to the *Origin Pool* configuration.
 14. Click "Save and Exit" to create the Origin Pool.
 
-Exercise 4: Edit HTTP Load Balancer Configuration
----------------------------------------------------
+Exercise 4: Diagnostics HTTP Load Balancer
+------------------------------------------
 
-1. On the left menu, go to "Manage"->"Load Balancers"->"HTTP Load Balancers". Click the "..." next to the HTTP LB that you previously created.
+1. On the left menu, go to "Manage"->"Load Balancers"->"HTTP Load Balancers". Click "Add HTTP Load Balancer".
 
-<img src=../images/edit-http-lb.png width="75%">
+2. Enter the following information:
 
-2. Click "Manage Configuration".
-3. In the upper right, click "Edit Configuration".
-4. Under *Origins*, click *the pencil icon* under the "Actions" column to modify your Origin Pool.
-5. Replace the Origin Pool "frontend-public" with the new Origin Pool "frontend-private".
-6. Click "Apply" to return to the previous screen.
-7. Click "Save and Exit" to save the HTTP LB changes.
-8. Refresh the browser window for your URL ("http://***\<adjective-animal\>***.sales-demo.f5demos.com").
+*Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
-You now have access to the "diagnostics" app running inside the AWS environment. You will use this in later labs to explore and run tests as an "internal client". For the purposes of this demo, the "diagnostics" app can be considered a jumphost.
+| Variable | Value |
+| --- | --- |
+| Name | diagnostics |
+| Domains | diagnostics.***\<adjective-animal\>***.sales-demo.f5demos.com |
+| Select type of Load Balancer | HTTP |
+| Automatically Manage DNS Records | Yes/Check |
 
-<img src=../images/container-tool.png width="75%">
+<img src=../images/lb-diagnostics.png width="75%">
+
+> My demo ephemeral namespace is "***protective-mouse***". Therefore my domain is "diagnostics.***protective-mouse***.sales-demo.f5demos.com".
+
+3. Under the *Origin Pools* section, click "Add Item".
+4. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "diagnostics" you created earlier.
+5. Click "Apply" to return to the previous screen.
+6. Back in the *HTTP Load Balancer* creation menu, scroll down to the section *Other Settings*.
+7. The value "Internet" has been selected by default under "VIP Advertisement".
+
+<img src=../images/lb-vip.png width="75%">
+
+8. Click "Save and Exit" to create the HTTP Load Balancer.
+
+You now have access to the "diagnostics" app running inside the AWS environment. You will use this in later labs to explore and run tests as an "internal client". The FQDN used in our example is http://diagnostics.protective-mouse.sales-demo.f5demos.com. Your FQDN should follow the format of *diagnostics.****[unique-namespace]****.sales-demo.f5demos.com*.
+
+<img src=../images/public-vip-diagnostics.png width="75%">
 
 Exercise 5: Review General Monitoring Stats
 ---------------------------------------------------
