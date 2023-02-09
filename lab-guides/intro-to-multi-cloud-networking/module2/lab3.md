@@ -10,7 +10,7 @@ You will complete the following tasks:
 - Create an Origin Pool for the Azure "backend"
 - Create a TCP Load Balancer and expose the "backend" on F5 Distributed Cloud AWS site
 - Validate DNS again from the AWS "diagnostics" app
-- Connect to the Azure "backend" from the AWS "diagnostics" app
+- Connect to the Azure "backend" from the AWS "diagnostics" app (acting as "internal client")
 
 ![tcplb-lab.png](../images/tcplb-lab.png)
 
@@ -20,7 +20,7 @@ You will complete the following tasks:
 1. "frontend" performs a DNS lookup for "backend"
 2. DNS resolves to the inside interface of the AWS F5 node
 3. "frontend" connects to the inside interface of the AWS F5 node
-4. Connection is forwarded to the Azure F5 node via the F5 Distributed Cloud Global Network
+4. Connection forwarded from AWS F5 node to Azure F5 node via F5 Distributed Cloud Global Network
 5. Azure F5 node connects via inside interface to the "backend" on a private subnet
 
 Exercise 1: Verify DNS
@@ -28,9 +28,9 @@ Exercise 1: Verify DNS
 
 In the previous lab exercise, you made a "In Container Diagnostic Services" service available. This is small application that allows you to run tools to verify DNS and run commands like "curl" to simulate HTTP/HTTPS connections from inside the AWS environment.
 
-1. Reopen the browser window for your URL ("http://***\<adjective-animal\>***.sales-demo.f5demos.com"). It will open the "diagnostics" app.
+1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click "DNS Lookup".
-3. Enter "ip-10-1-52-200.us-west-2.compute.internal" in the *target* field.
+3. Enter "`ip-10-1-52-200.us-west-2.compute.internal`" in the *target* field.
 4. Click "Lookup".
 
 ```
@@ -52,18 +52,18 @@ In the previous lab exercise, you made a "In Container Diagnostic Services" serv
    ;; Query time: 4 msec
 ```
 
-The last step was a basic DNS test to simply illustrate that the "diagnostics" app running in AWS can do a DNS query and receive an answer. The *target* value was the AWS EC2 instance private DNS name, and the answer is the private IP address of the AWS instance. Next, you will verify that there is not yet a DNS record for ***\<adjective-animal\>***.sales-demo.f5demos.internal.
+The last step was a basic DNS test to simply illustrate that the "diagnostics" app running in AWS can do a DNS query and receive an answer. The *target* value was the AWS EC2 instance private DNS name, and the answer is the private IP address of the AWS instance. Next, you will verify that there is not yet a DNS record for backend.***\<adjective-animal\>***.sales-demo.f5demos.internal.
 
 5. Refresh your browser window.
 6. Click "DNS Lookup".
-7. Enter "***\<adjective-animal\>***.sales-demo.f5demos.internal" in the *target* field.
+7. Enter "`backend.<adjective-animal>.sales-demo.f5demos.internal`" in the *target* field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
 8. Click "Lookup".
 
 ```
-   ; <<>> DiG 9.16.1-Ubuntu <<>> @127.0.0.53 protective-mouse.sales-demo.f5demos.internal A
+   ; <<>> DiG 9.16.1-Ubuntu <<>> @127.0.0.53 backend.protective-mouse.sales-demo.f5demos.internal A
    ; (1 server found)
    ;; global options: +cmd
    ;; Got answer:
@@ -73,7 +73,7 @@ The last step was a basic DNS test to simply illustrate that the "diagnostics" a
    ;; OPT PSEUDOSECTION:
    ; EDNS: version: 0, flags:; udp: 65494
    ;; QUESTION SECTION:
-   ;protective-mouse.sales-demo.f5demos.internal. IN A
+   ;backend.protective-mouse.sales-demo.f5demos.internal. IN A
 
    ;; Query time: 24 msec
 ```
@@ -140,13 +140,13 @@ In this exercise, you will create an F5 Distributed Cloud TCP Load Balancer for 
 | Variable | Value |
 | --- | --- |
 | Name | backend |
-| Domains | ***\<adjective-animal\>***.sales-demo.f5demos.internal |
+| Domains | backend.***\<adjective-animal\>***.sales-demo.f5demos.internal |
 | Listen Port | 80 |
 | SNI and Default LB choice | No SNI |
 | Automatically Manage DNS Records | No/Uncheck |
 | Where to Advertise the VIP | Advertise Custom |
 
-> My demo ephemeral namespace is "***protective-mouse***". Therefore my private domain is "***protective-mouse***.sales-demo.f5demos.internal".
+> My demo ephemeral namespace is "***protective-mouse***". Therefore my domain is "backend.***protective-mouse***.sales-demo.f5demos.internal".
 
 4. Under the *Origin Pools* section, click "Add Item".
 5. The method for "Select Origin Pool Method" should be "Origin Pool". Under the "Origin Pool" dropdown menu, select the "backend" you created earlier.
@@ -180,16 +180,16 @@ The F5 Distributed Cloud gateway provides a recursive DNS resolver. You can eith
 
 > For this demo, the internal DNS zone ***sales-demo.f5demos.internal*** has been pre-built in each public cloud environment. The zone is configured to forward all requests to the F5 Distributed Cloud node.
 
-1. Reopen the browser window for your URL ("http://***\<adjective-animal\>***.sales-demo.f5demos.com"). It will open the "diagnostics" app.
+1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click "DNS Lookup".
-3. Enter "***\<adjective-animal\>***.sales-demo.f5demos.internal" in the *target* field.
+3. Enter "`backend.<adjective-animal>.sales-demo.f5demos.internal`" in the *target* field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
 4. Click "Lookup".
 
 ```
-   ; <<>> DiG 9.16.1-Ubuntu <<>> @127.0.0.53 protective-mouse.sales-demo.f5demos.internal A
+   ; <<>> DiG 9.16.1-Ubuntu <<>> @127.0.0.53 backend.protective-mouse.sales-demo.f5demos.internal A
    ; (1 server found)
    ;; global options: +cmd
    ;; Got answer:
@@ -199,24 +199,24 @@ The F5 Distributed Cloud gateway provides a recursive DNS resolver. You can eith
    ;; OPT PSEUDOSECTION:
    ; EDNS: version: 0, flags:; udp: 65494
    ;; QUESTION SECTION:
-   ;protective-mouse.sales-demo.f5demos.internal. IN A
+   ;backend.protective-mouse.sales-demo.f5demos.internal. IN A
 
    ;; ANSWER SECTION:
-   protective-mouse.sales-demo.f5demos.internal. 300 IN A 10.1.20.39
+   backend.protective-mouse.sales-demo.f5demos.internal. 300 IN A 10.1.20.39
 
    ;; Query time: 0 msec
 ```
 
-You should no longer get an error. In this example, the domain name "protective-mouse.sales-demo.f5demos.internal" resolves internally to the IP address of the F5 Distributed Cloud node internal interface.
+You should no longer get an error. In this example, the domain name "backend.protective-mouse.sales-demo.f5demos.internal" resolves internally to the IP address of the F5 Distributed Cloud node internal interface.
 
 Exercise 5: Connect to the Backend
 ---------------------------------------------------
 
 In this exercise, you will emulate how a distributed application can access a resource that resides in another remote network via the F5 Distributed Cloud Global Network.
 
-1. Reopen the browser window for your URL ("http://***\<adjective-animal\>***.sales-demo.f5demos.com"). It will open the "diagnostics" app.
+1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click on "Run Command".
-3. Enter "curl -s http://***\<adjective-animal\>***.sales-demo.f5demos.internal" in the field.
+3. Enter "`curl -s http://backend.<adjective-animal>.sales-demo.f5demos.com`" in the field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
@@ -244,7 +244,7 @@ In this exercise, you will emulate how a distributed application can access a re
     Request Method: GET
        Request URI: /
 
-       host_header: protective-mouse.sales-demo.f5demos.internal
+       host_header: backend.protective-mouse.sales-demo.f5demos.internal
         user-agent: curl/7.68.0
 
    command completed with return code:0
@@ -255,7 +255,7 @@ You will see an output and node name of "Q2 Learning Week (Azure)". This is the 
 Next, try repeating the same command with the private IP address of the F5 Distributed Cloud node in AWS. This is the IP address you retrieved in Exercise 4.
 
 5. Click on "Run Command".
-6. Enter "curl -s http://10.1.20.39".
+6. Enter "`curl -s http://10.1.20.39`".
 7. Click on "Run Command".
 
 ```
