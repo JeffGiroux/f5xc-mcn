@@ -28,9 +28,9 @@ Exercise 1: Verify DNS
 
 In the previous lab exercise, you made a "In Container Diagnostic Services" service available. This is small application that allows you to run tools to verify DNS and run commands like "curl" to simulate HTTP/HTTPS connections from inside the AWS environment.
 
-1. Reopen the browser window for your URL ("http://diagnostics.***\<adjective-animal\>***.sales-demo.f5demos.com"). It will open the "diagnostics" app.
+1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click "DNS Lookup".
-3. Enter "ip-10-1-52-200.us-west-2.compute.internal" in the *target* field.
+3. Enter "`ip-10-1-52-200.us-west-2.compute.internal`" in the *target* field.
 4. Click "Lookup".
 
 ```
@@ -56,7 +56,7 @@ The last step was a basic DNS test to simply illustrate that the "diagnostics" a
 
 5. Refresh your browser window.
 6. Click "DNS Lookup".
-7. Enter "backend.***\<adjective-animal\>***.sales-demo.f5demos.internal" in the *target* field.
+7. Enter "`backend.<adjective-animal>.sales-demo.f5demos.internal`" in the *target* field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
@@ -180,9 +180,9 @@ The F5 Distributed Cloud gateway provides a recursive DNS resolver. You can eith
 
 > For this demo, the internal DNS zone ***sales-demo.f5demos.internal*** has been pre-built in each public cloud environment. The zone is configured to forward all requests to the F5 Distributed Cloud node.
 
-1. Reopen the browser window for your URL ("http://diagnostics.***\<adjective-animal\>***.sales-demo.f5demos.com"). It will open the "diagnostics" app.
+1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click "DNS Lookup".
-3. Enter "backend.***\<adjective-animal\>***.sales-demo.f5demos.internal" in the *target* field.
+3. Enter "`backend.<adjective-animal>.sales-demo.f5demos.internal`" in the *target* field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
@@ -214,9 +214,9 @@ Exercise 5: Connect to the Backend
 
 In this exercise, you will emulate how a distributed application can access a resource that resides in another remote network via the F5 Distributed Cloud Global Network.
 
-1. Reopen the browser window for your URL ("http://diagnostics.***\<adjective-animal\>***.sales-demo.f5demos.com"). It will open the "diagnostics" app.
+1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click on "Run Command".
-3. Enter "curl -s http://backend.***\<adjective-animal\>***.sales-demo.f5demos.internal" in the field.
+3. Enter "`curl -s http://backend.<adjective-animal>.sales-demo.f5demos.com`" in the field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
@@ -255,7 +255,7 @@ You will see an output and node name of "Q2 Learning Week (Azure)". This is the 
 Next, try repeating the same command with the private IP address of the F5 Distributed Cloud node in AWS. This is the IP address you retrieved in Exercise 4.
 
 5. Click on "Run Command".
-6. Enter "curl -s http://10.1.20.39".
+6. Enter "`curl -s http://10.1.20.39`".
 7. Click on "Run Command".
 
 ```
