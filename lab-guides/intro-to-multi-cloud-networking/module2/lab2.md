@@ -19,7 +19,7 @@ You will complete the following tasks:
 2. Connection forwarded to F5 node in AWS site via IPSEC tunnels
 3. F5 node forwards traffic to "frontend"
 4. AWS "frontend" connects to Azure "backend" via TCP LB deployed in AWS site
-5. Connect forwarded from AWS F5 node to Azure F5 node via F5 Distributed Cloud Global Network
+5. Connection forwarded from AWS F5 node to Azure F5 node via F5 Distributed Cloud Global Network
 6. Azure F5 node forwards traffic to "backend"
 
 Regional Edge
