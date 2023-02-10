@@ -157,7 +157,6 @@ In this exercise, you will create an F5 Distributed Cloud TCP Load Balancer for 
 
 | Variable | Value |
 | --- | --- |
-| Name | backend |
 | Select Where to Advertise | Site |
 | Site Network | Inside Network |
 | Site Reference | system/q2lw-aws-c8e4 |
@@ -216,7 +215,7 @@ In this exercise, you will emulate how a distributed application can access a re
 
 1. Reopen the browser window for your URL "`http://diagnostics.<adjective-animal>.sales-demo.f5demos.com`". It will open the "diagnostics" app.
 2. Click on "Run Command".
-3. Enter "`curl -s http://backend.<adjective-animal>.sales-demo.f5demos.com`" in the field.
+3. Enter "`curl -s http://backend.<adjective-animal>.sales-demo.f5demos.internal`" in the field.
 
 *Note: Replace the host **\<adjective-animal\>** with your namespace (found in "Account Settings"...see [Module2>Lab1](lab1.md))*
 
